@@ -17,9 +17,11 @@
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
+//apply plugin: 'maven'
+//apply plugin: 'maven-publish'
 //apply from: 'config.gradle'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.GitLqr'
 
 repositories {
     jcenter()
@@ -105,20 +107,20 @@ artifacts {
     archives sourcesJar, javadocJar
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            if (plugins.hasPlugin('war')) {
-                from components.web
-            } else {
-                from components.java
-            }
-
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
-}
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            if (plugins.hasPlugin('war')) {
+//                from components.web
+//            } else {
+//                from components.java
+//            }
+//
+//            artifact sourcesJar
+//            artifact javadocJar
+//        }
+//    }
+//}
 
 project.ext.RP_ARTIFACT_ID = 'replugin-plugin-gradle'
-apply from: '../rp-publish.gradle'
+//apply from: '../rp-publish.gradle'

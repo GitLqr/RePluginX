@@ -15,8 +15,9 @@
  */
 
 include ':replugin-host-gradle'
-include ':replugin-plugin-gradle'
 include ':replugin-host-library'
+
+include ':replugin-plugin-gradle'
 include ':replugin-plugin-library'
 
 includeBuild('./replugin-sample/host')

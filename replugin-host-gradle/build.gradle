@@ -16,8 +16,10 @@
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
+//apply plugin: 'maven'
+//apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.GitLqr'
 
 repositories {
     jcenter()
@@ -54,4 +56,4 @@ dependencies {
 }
 
 project.ext.RP_ARTIFACT_ID = 'replugin-host-gradle'
-apply from: '../rp-publish.gradle'
+//apply from: '../rp-publish.gradle'
