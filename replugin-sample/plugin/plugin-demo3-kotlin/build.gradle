@@ -14,24 +14,17 @@
  * the License.
  */
 buildscript {
-    { p, cfg = "rp-config.gradle" -> if (new File(p, cfg).exists()) apply from: "${p}/${cfg}" else if (p.exists()) call(p.parentFile) }(buildscript.sourceFile.parentFile)
-    ext.kotlin_version = '1.1.3'
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
+    { p, cfg = "rpx-config.gradle" -> if (new File(p, cfg).exists()) apply from: "${p}/${cfg}" else if (p.exists()) call(p.parentFile) }(buildscript.sourceFile.parentFile)
+    repositories repositoriesExt
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath "com.qihoo360.replugin:replugin-plugin-gradle:${RP_VERSION}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath classpathExt['android-build-tools']
+        classpath classpathExt['replugin-plugin-gradle']
+        classpath classpathExt['kotlin-gradle-plugin']
     }
 }
 
 allprojects {
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
+    repositories repositoriesExt
 }
 
 task clean(type: Delete) {

@@ -29,7 +29,7 @@ android {
 apply plugin: 'replugin-plugin-gradle'
 
 dependencies {
-    compile "com.qihoo360.replugin:replugin-plugin-lib:${RP_VERSION}"
+    compile dependenciesExt['replugin-plugin-library']
 
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
 
