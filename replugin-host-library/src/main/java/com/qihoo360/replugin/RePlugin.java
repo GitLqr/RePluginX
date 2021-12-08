@@ -30,7 +30,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +48,7 @@ import com.qihoo360.mobilesafe.api.Tasks;
 import com.qihoo360.mobilesafe.core.BuildConfig;
 import com.qihoo360.mobilesafe.svcmanager.QihooServiceManager;
 import com.qihoo360.replugin.base.IPC;
+import com.qihoo360.replugin.compat.LocalBroadcastManager;
 import com.qihoo360.replugin.component.ComponentList;
 import com.qihoo360.replugin.component.app.PluginApplicationClient;
 import com.qihoo360.replugin.debugger.DebuggerReceivers;
@@ -528,7 +528,7 @@ public class RePlugin {
      *
      * @param pluginName 插件名
      * @param layoutName Layout名字
-     * @param root Optional view to be the parent of the generated hierarchy.
+     * @param root       Optional view to be the parent of the generated hierarchy.
      * @return 插件的View。若为Null则表示获取失败
      * @throws ClassCastException 若不是想要的那个View类型，或者ClassLoader不同，则可能会出现此异常。应确保View类型正确
      * @since 2.2.0
@@ -865,7 +865,7 @@ public class RePlugin {
      * 取消对某个“跳转”类的注册，恢复原状。<p>
      * 请参见 registerHookingClass 的详细说明
      *
-     * @param source   要替换的类的全名
+     * @param source 要替换的类的全名
      * @see #registerHookingClass(String, ComponentName, Class)
      * @since 2.1.6
      */

@@ -21,7 +21,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.qihoo360.loader2.CertUtils;
@@ -424,7 +423,7 @@ public class PluginManagerServer {
         }
     }
 
-    private void move(@NonNull PluginInfo curPi, @NonNull PluginInfo newPi) {
+    private void move(PluginInfo curPi, PluginInfo newPi) {
         if (LogDebug.LOG) {
             LogDebug.i(TAG, "move. curPi=" + curPi.getPath() + "; newPi=" + newPi.getPath());
         }
@@ -463,7 +462,7 @@ public class PluginManagerServer {
         }
     }
 
-    private void delete(@NonNull PluginInfo pi) {
+    private void delete(PluginInfo pi) {
         try {
             FileUtils.forceDelete(new File(pi.getPath()));
             FileUtils.forceDelete(pi.getDexFile());

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -756,7 +755,7 @@ public class PluginProcessMain {
 
     ///
 
-    private static <T> T writeProcessClientLock(@NonNull final Action<T> action) {
+    private static <T> T writeProcessClientLock(final Action<T> action) {
         final long start = System.currentTimeMillis();
 //        final String stack = OptUtil.stack2Str(Thread.currentThread().getStackTrace()[3]);
         try {
@@ -773,7 +772,7 @@ public class PluginProcessMain {
         }
     }
 
-    private static <T> T readProcessClientLock(@NonNull final Action<T> action) {
+    private static <T> T readProcessClientLock(final Action<T> action) {
         final long start = System.currentTimeMillis();
 //        final String stack = OptUtil.stack2Str(Thread.currentThread().getStackTrace()[3]);
         try {

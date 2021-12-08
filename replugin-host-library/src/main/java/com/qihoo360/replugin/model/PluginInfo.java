@@ -26,7 +26,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.qihoo360.loader2.Constant;
@@ -407,7 +406,6 @@ public class PluginInfo implements Serializable, Parcelable, Cloneable {
      * @param dirSuffix 目录后缀
      * @return 插件的Dex所在目录的File对象
      */
-    @NonNull
     private File getDexDir(File dexDir, String dirSuffix) {
 
         File dir = new File(dexDir, makeInstalledFileName() + dirSuffix);
@@ -444,15 +442,16 @@ public class PluginInfo implements Serializable, Parcelable, Cloneable {
 
     /**
      * 获取Dex（优化后）生成时所在的目录 <p>
-     *
+     * <p>
      * Android O之前：
      * 若为"纯APK"插件，则会位于app_p_od中；若为"p-n"插件，则会位于"app_plugins_v3_odex"中 <p>
      * 若支持同版本覆盖安装的话，则会位于app_p_c中； <p>
-     *
+     * <p>
      * Android O：
      * APK存放目录/oat/{cpuType}
-     *
+     * <p>
      * 注意：仅供框架内部使用
+     *
      * @return 优化后Dex所在目录的File对象
      */
     public File getDexParentDir() {
@@ -475,13 +474,13 @@ public class PluginInfo implements Serializable, Parcelable, Cloneable {
 
     /**
      * 获取Dex（优化后）所在的文件信息 <p>
-     *
+     * <p>
      * Android O 之前：
      * 若为"纯APK"插件，则会位于app_p_od中；若为"p-n"插件，则会位于"app_plugins_v3_odex"中 <p>
-     *
+     * <p>
      * Android O：
      * APK存放目录/oat/{cpuType}/XXX.odex
-     *
+     * <p>
      * 注意：仅供框架内部使用
      *
      * @return 优化后Dex所在文件的File对象
@@ -1202,7 +1201,7 @@ public class PluginInfo implements Serializable, Parcelable, Cloneable {
 
     ////
 
-    private <T> T get(String name, @NonNull T def) {
+    private <T> T get(String name, T def) {
         final Object obj = mJson.get(name);
         return (def.getClass().isInstance(obj)) ? (T) obj : def;
     }

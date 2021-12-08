@@ -27,7 +27,6 @@ import android.content.pm.ServiceInfo;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
 import com.qihoo360.i.Factory;
@@ -39,6 +38,7 @@ import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginConstants;
 import com.qihoo360.replugin.RePluginInternal;
 import com.qihoo360.replugin.base.IPC;
+import com.qihoo360.replugin.compat.LocalBroadcastManager;
 import com.qihoo360.replugin.component.activity.DynamicClassProxyActivity;
 import com.qihoo360.replugin.component.dummy.DummyActivity;
 import com.qihoo360.replugin.component.dummy.DummyProvider;

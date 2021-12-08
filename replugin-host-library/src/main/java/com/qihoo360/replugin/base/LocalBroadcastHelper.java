@@ -18,7 +18,8 @@ package com.qihoo360.replugin.base;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
+
+import com.qihoo360.replugin.compat.LocalBroadcastManager;
 
 import java.util.concurrent.Callable;
 
@@ -26,7 +27,7 @@ import java.util.concurrent.Callable;
  * 和LocalBroadcastManager有关的帮助类
  *
  * @author RePlugin Team
- * @see android.support.v4.content.LocalBroadcastManager
+ * @see LocalBroadcastManager
  */
 
 public class LocalBroadcastHelper {

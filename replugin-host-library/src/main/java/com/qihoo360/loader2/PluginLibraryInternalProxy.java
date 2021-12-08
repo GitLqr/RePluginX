@@ -28,6 +28,7 @@ import android.text.TextUtils;
 import com.qihoo360.i.Factory;
 import com.qihoo360.i.Factory2;
 import com.qihoo360.i.IPluginManager;
+import com.qihoo360.replugin.compat.CompatConfig;
 import com.qihoo360.replugin.utils.ReflectUtils;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.base.IPC;
@@ -436,6 +437,8 @@ public class PluginLibraryInternalProxy {
             savedInstanceState.setClassLoader(activity.getClassLoader());
             //
             try {
+                // replugin-androidx: 注意此处的android:support:fragments不需要修改
+                // 因为AndroidX的FragmentActivity的FRAGMENTS_TAG没有变化，仍然是这个字符串
                 savedInstanceState.remove("android:support:fragments");
             } catch (Throwable e) {
                 if (LOGR) {
@@ -780,7 +783,7 @@ public class PluginLibraryInternalProxy {
     private static int getDefaultThemeId() {
         if (HostConfigHelper.ACTIVITY_PIT_USE_APPCOMPAT) {
             try {
-                Class clazz = ReflectUtils.getClass("android.support.v7.appcompat.R$style");
+                Class clazz = ReflectUtils.getClass(CompatConfig.DEPENDENCY_ANDROIDX ? "androidx.appcompat.R$style" : "android.support.v7.appcompat.R$style");
                 return (int) ReflectUtils.readStaticField(clazz, "Theme_AppCompat");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

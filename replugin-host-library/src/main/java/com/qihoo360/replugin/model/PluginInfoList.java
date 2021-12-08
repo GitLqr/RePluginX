@@ -17,7 +17,6 @@
 package com.qihoo360.replugin.model;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.qihoo360.loader2.Constant;
@@ -124,7 +123,6 @@ public class PluginInfoList implements Iterable<PluginInfo> {
 
     ///
 
-    @NonNull
     private Collection<PluginInfo> getCopyValues() {
         return new HashSet(mMap.values()); //是否有必要去重???
     }
@@ -135,7 +133,6 @@ public class PluginInfoList implements Iterable<PluginInfo> {
         if (!TextUtils.isEmpty(pi.getAlias())) mMap.put(pi.getAlias(), pi);
     }
 
-    @NonNull
     private File getFile(Context context) {
         final File d = context.getDir(Constant.LOCAL_PLUGIN_APK_SUB_DIR, 0);
         return new File(d, "p.l");
