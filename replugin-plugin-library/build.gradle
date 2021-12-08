@@ -44,6 +44,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided 'com.android.support:appcompat-v7:23.4.0'
+    provided 'androidx.appcompat:appcompat:1.1.0'
 }
 
 project.ext.RP_ARTIFACT_ID = 'replugin-plugin-lib'

@@ -21,8 +21,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.qihoo360.replugin.RePluginInternal;
 import com.qihoo360.replugin.helper.LogRelease;
@@ -33,7 +34,7 @@ import java.lang.reflect.Field;
 /**
  * @author RePlugin Team
  */
-public abstract class PluginAppCompatActivity extends AppCompatActivity {
+public abstract class PluginFragmentActivityAndroidX extends FragmentActivity {
 
     private PluginResource pluginResource;
 
@@ -96,7 +97,7 @@ public abstract class PluginAppCompatActivity extends AppCompatActivity {
             // 1、可能无法恢复系统级View的保存的状态；
             // 2、如果自己代码处理不当，可能会出现异常。故自己代码一定要用SecExtraUtils来获取Bundle数据
             if (LogRelease.LOGR) {
-                LogRelease.e("PluginAppCompatActivity", "o r i s: p=" + getPackageCodePath() + "; " + e.getMessage(), e);
+                LogRelease.e("PluginFragmentActivityAndroidX", "o r i s: p=" + getPackageCodePath() + "; " + e.getMessage(), e);
             }
         }
     }
