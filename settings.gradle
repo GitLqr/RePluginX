@@ -14,16 +14,45 @@
  * the License.
  */
 
+// 当前工程
 include ':replugin-host-gradle'
 include ':replugin-host-library'
-
 include ':replugin-plugin-gradle'
 include ':replugin-plugin-library'
 
-includeBuild('./replugin-sample/host')
-includeBuild('./replugin-sample/plugin/plugin-demo1')
-includeBuild('./replugin-sample/plugin/plugin-demo2')
-includeBuild('./replugin-sample/plugin/plugin-demo3-kotlin')
-includeBuild('./replugin-sample/plugin/plugin-webview')
-includeBuild('./replugin-sample-extra/fresco/FrescoHost')
-includeBuild('./replugin-sample-extra/fresco/FrescoPlugin')
+// 额外工程
+includeBuildExt('./replugin-sample/host')
+includeBuildExt('./replugin-sample/plugin/plugin-demo1')
+includeBuildExt('./replugin-sample/plugin/plugin-demo2')
+includeBuildExt('./replugin-sample/plugin/plugin-demo3-kotlin')
+includeBuildExt('./replugin-sample/plugin/plugin-webview')
+includeBuildExt('./replugin-sample-extra/fresco/FrescoHost')
+includeBuildExt('./replugin-sample-extra/fresco/FrescoPlugin')
+
+def includeBuildExt(path) {
+    includeBuild(path) { it ->
+
+        // beforeProject 相当于 beforeEvaluate
+        it.getLoadedSettings().getGradle().beforeProject { project ->
+
+            // 统一版本
+            project.ext {
+                RPX_VERSION = 'v0.0.2'
+            }
+
+            // 统一仓库
+            project.buildscript.repositories {
+                mavenLocal()
+                jcenter()
+                maven { url 'https://jitpack.io' }
+            }
+            project.allprojects {
+                repositories {
+                    mavenLocal()
+                    jcenter()
+                    maven { url 'https://jitpack.io' }
+                }
+            }
+        }
+    }
+}
