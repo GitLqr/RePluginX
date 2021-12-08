@@ -13,27 +13,29 @@ import android.content.IntentFilter;
  */
 public class LocalBroadcastManagerSupport extends LocalBroadcastManager {
 
-    public LocalBroadcastManagerSupport(Context context) {
+    private final android.support.v4.content.LocalBroadcastManager localBroadcastManager;
 
+    public LocalBroadcastManagerSupport(Context context) {
+        localBroadcastManager = android.support.v4.content.LocalBroadcastManager.getInstance(context);
     }
 
     @Override
     public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
-
+        localBroadcastManager.registerReceiver(receiver, filter);
     }
 
     @Override
     public void unregisterReceiver(BroadcastReceiver receiver) {
-
+        localBroadcastManager.unregisterReceiver(receiver);
     }
 
     @Override
     public boolean sendBroadcast(Intent intent) {
-        return false;
+        return localBroadcastManager.sendBroadcast(intent);
     }
 
     @Override
     public void sendBroadcastSync(Intent intent) {
-
+        localBroadcastManager.sendBroadcastSync(intent);
     }
 }

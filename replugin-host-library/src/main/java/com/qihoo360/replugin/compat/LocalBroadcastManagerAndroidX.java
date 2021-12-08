@@ -13,7 +13,7 @@ import android.content.IntentFilter;
  */
 public class LocalBroadcastManagerAndroidX extends LocalBroadcastManager {
 
-    private androidx.localbroadcastmanager.content.LocalBroadcastManager localBroadcastManager;
+    private final androidx.localbroadcastmanager.content.LocalBroadcastManager localBroadcastManager;
 
     public LocalBroadcastManagerAndroidX(Context context) {
         localBroadcastManager = androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(context);
@@ -38,5 +38,4 @@ public class LocalBroadcastManagerAndroidX extends LocalBroadcastManager {
     public void sendBroadcastSync(Intent intent) {
         localBroadcastManager.sendBroadcastSync(intent);
     }
-
 }
