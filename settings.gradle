@@ -29,3 +29,6 @@ includeBuild('./replugin-sample/plugin/plugin-webview')
 includeBuild('./replugin-sample-extra/fresco/FrescoHost')
 includeBuild('./replugin-sample-extra/fresco/FrescoPlugin')
 
+//includeBuild('./repluginx-sample/host')
+//includeBuild('./repluginx-sample/plugin/plugin-demo1')
+
