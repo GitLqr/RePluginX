@@ -3,6 +3,14 @@ project.ext {
     android_build_tools_version = "2.3.3" // 2.2.0
     kotlin_version = '1.1.3'
     repluginx_version = 'v0.0.2'
+    support_version = '25.3.1'
+
+    androidExt = [
+            "compileSdkVersion": 25,
+            "buildToolsVersion": "25.0.2",
+            "minSdkVersion"    : 9,
+            "targetSdkVersion" : 22,
+    ]
 
     classpathExt = [
             "android-build-tools"   : "com.android.tools.build:gradle:${android_build_tools_version}",
@@ -12,6 +20,8 @@ project.ext {
     ]
 
     dependenciesExt = [
+            "support-v4"             : "com.android.support:support-v4:${support_version}",
+            "appcompat-v7"           : "com.android.support:appcompat-v7:${support_version}",
             "kotlin-stdlib-jre7"     : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
             "replugin-host-library"  : "com.github.GitLqr.RePluginX:replugin-host-library:${repluginx_version}",
             "replugin-plugin-library": "com.github.GitLqr.RePluginX:replugin-plugin-library:${repluginx_version}"

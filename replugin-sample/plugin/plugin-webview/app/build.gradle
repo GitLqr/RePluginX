@@ -22,15 +22,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         versionName "1.1"
         versionCode 100
-        targetSdkVersion 21
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         applicationId "com.qihoo360.replugin.sample.webview"
-        minSdkVersion 15
         multiDexEnabled false
     }
 
@@ -61,6 +61,6 @@ repluginPluginConfig {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile dependenciesExt['appcompat-v7']
     compile dependenciesExt['replugin-plugin-library']
 }

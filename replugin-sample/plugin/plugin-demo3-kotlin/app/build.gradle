@@ -24,15 +24,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         versionName "1.0"
         versionCode 100
-        targetSdkVersion 21
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         applicationId "com.qihoo360.replugin.sample.demo3"
-        minSdkVersion 15
     }
 
     buildTypes {
