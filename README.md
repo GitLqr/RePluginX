@@ -1,11 +1,13 @@
 
-## RePluginX
+## RePluginX 
 
-本 Repo 是对 [Qihoo360 RePlugin](https://github.com/Qihoo360/RePlugin) 的完善、增强。
+![RePluginX-Logo](https://cdn.jsdelivr.net/gh/FullStackAction/PicBed@resource20210320170901/image/202112101539434.png)
 
-- Q: 为什么有这个 Repo？
-- A: 因工作项目需要 使用 & 定制，但官方已经很久没有维护（难道是太稳定了？），且 issue 也没有怎么处理，提交官方 pr 怕是要等到天荒地老，时间紧、任务重，我还是自己维护一个吧。
-
+<p align="center">
+  <a href="https://github.com/Qihoo360/RePlugin/blob/master/LICENSE">
+    <img src="http://img.shields.io/badge/license-Apache2.0-brightgreen.svg?style=flat" alt="license" />
+  </a>
+</p>
 
 
 ## 特性
@@ -18,9 +20,7 @@
 
 ## 使用
 
-- 开源协议：[![license](http://img.shields.io/badge/license-Apache2.0-brightgreen.svg?style=flat)](https://github.com/Qihoo360/RePlugin/blob/master/LICENSE) 
 - **RPX_VERSION**： ![Release Version](https://img.shields.io/github/v/release/GitLqr/RePluginX.svg)
-
 - **gralde Versions**：![](https://img.shields.io/badge/gradle-4.6-green)
 - **gradle-android-tools Versions**：![](https://img.shields.io/badge/android.tools-2.3.3-green) ![](https://img.shields.io/badge/android.tools-3.2.1-green)
 
@@ -103,6 +103,6 @@ dependencies {
 
 ## 官方原文档
 
-- （[RePlugin 官方【英文】文档](./README_ORIGINAL.md)）
-- （[RePlugin 官方【中文】文档](./README_CN.md)）
-- [（RePlugin 官方 Wiki）](https://github.com/Qihoo360/RePlugin/wiki)
+- [《RePlugin 官方【英文】文档》](./README_ORIGINAL.md)
+- [《RePlugin 官方【中文】文档》](./README_CN.md)
+- [《RePlugin 官方 Wiki》](https://github.com/Qihoo360/RePlugin/wiki)
