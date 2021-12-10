@@ -14,8 +14,11 @@ public final class CompatConfig {
     public static final boolean DEPENDENCY_SUPPORT;
 
     static {
-        DEPENDENCY_ANDROIDX = findClassByClassName("androidx.fragment.app.FragmentActivity");
-        DEPENDENCY_SUPPORT = findClassByClassName("android.support.v4.app.FragmentActivity");
+        // FIX: 宿主工程（空壳）不一定会依赖 androidx.appcompat，但是一定会依赖 androidx.localbroadcastmanager
+        DEPENDENCY_ANDROIDX = findClassByClassName("androidx.localbroadcastmanager.content.LocalBroadcastManager");
+        DEPENDENCY_SUPPORT = findClassByClassName("android.support.v4.content.LocalBroadcastManager");
+        // DEPENDENCY_ANDROIDX = findClassByClassName("androidx.fragment.app.FragmentActivity");
+        // DEPENDENCY_SUPPORT = findClassByClassName("android.support.v4.app.FragmentActivity");
     }
 
     private CompatConfig() {
