@@ -1,7 +1,11 @@
 
 ## RePluginX 
 
-![RePluginX-Logo](https://cdn.jsdelivr.net/gh/FullStackAction/PicBed@resource20210320170901/image/202112101539434.png)
+<p align="center">
+  <a href="https://github.com/Qihoo360/RePlugin/wiki">
+    <img alt="RePluginX Logo" src="https://cdn.jsdelivr.net/gh/FullStackAction/PicBed@resource20210320170901/image/202112101539434.png" width="400"/>
+  </a>
+</p>
 
 <p align="center">
   <a href="https://github.com/Qihoo360/RePlugin/blob/master/LICENSE">
