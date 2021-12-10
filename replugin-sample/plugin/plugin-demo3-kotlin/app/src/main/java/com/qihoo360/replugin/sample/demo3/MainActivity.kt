@@ -48,7 +48,7 @@ class MainActivity : Activity() {
 
         initData()
 
-        val lv = findViewById(R.id.list_view) as ListView
+        val lv = findViewById<ListView>(R.id.list_view)
         lv.adapter = TestAdapter()
 
         Toast.makeText(this, "Hello Kotlin ! Hello RePlugin !", Toast.LENGTH_SHORT).show()

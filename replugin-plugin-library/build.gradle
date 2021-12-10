@@ -19,8 +19,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.GitLqr'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         minSdkVersion 1
@@ -42,9 +42,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:appcompat-v7:23.4.0'
-    provided 'androidx.appcompat:appcompat:1.1.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly dependenciesExt['appcompat-v7']
+    compileOnly dependenciesExt['appcompat-androidx']
 }
 
 project.ext.RP_ARTIFACT_ID = 'replugin-plugin-lib'

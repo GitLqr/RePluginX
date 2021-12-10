@@ -32,3 +32,13 @@ includeBuild('./replugin-sample-extra/fresco/FrescoPlugin')
 //includeBuild('./repluginx-sample/host')
 //includeBuild('./repluginx-sample/plugin/plugin-demo1')
 
+//includeBuild('./repluginx-sample/host') {
+//    dependencySubstitution {
+////        substitute module('com.github.GitLqr.RePluginX:replugin-host-library') with project(':')
+//    }
+//}
+//includeBuild('./repluginx-sample/plugin/plugin-demo1') {
+//    dependencySubstitution {
+////        substitute module('com.github.GitLqr.RePluginX:replugin-plugin-library') with project(':')
+//    }
+//}

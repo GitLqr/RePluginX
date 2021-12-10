@@ -17,13 +17,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion androidxExt['compileSdkVersion']
-    buildToolsVersion androidxExt['buildToolsVersion']
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         applicationId "com.qihoo360.replugin.sample.host"
-        minSdkVersion androidxExt['minSdkVersion']
-        targetSdkVersion androidxExt['targetSdkVersion']
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         versionCode 1
         versionName "1.0"
     }

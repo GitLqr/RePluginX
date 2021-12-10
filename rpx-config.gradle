@@ -8,13 +8,11 @@ project.ext {
     androidx_version = '1.2.0'
 
     androidExt = [
-            "compileSdkVersion": 25,
-            "buildToolsVersion": "25.0.2",
-            "minSdkVersion"    : 9,
-            "targetSdkVersion" : 22,
-    ]
+            // "compileSdkVersion": 25,
+            // "buildToolsVersion": "25.0.2",
+            // "minSdkVersion"    : 9,
+            // "targetSdkVersion" : 22,
 
-    androidxExt = [
             "compileSdkVersion": 29,  // AndroidX 至少 28 起步
             "buildToolsVersion": "29.0.3",
             "minSdkVersion"    : 15, // AndroidX 至少 14 起步

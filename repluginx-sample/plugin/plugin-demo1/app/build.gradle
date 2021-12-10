@@ -22,14 +22,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion androidxExt['compileSdkVersion']
-    buildToolsVersion androidxExt['buildToolsVersion']
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         versionName "1.1"
         versionCode 104
-        minSdkVersion androidxExt['minSdkVersion']
-        targetSdkVersion androidxExt['targetSdkVersion']
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         applicationId "com.qihoo360.replugin.sample.demo1"
         multiDexEnabled false
     }
