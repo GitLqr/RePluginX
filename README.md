@@ -10,7 +10,7 @@
 
 ## 特性
 
-- 同时支持 AnroidSupport、AndroidX （待完成）
+- 同时支持 AnroidSupport、AndroidX 
 - 支持配置 Activity 屏幕方向（待完成）
 - ...
 
@@ -18,7 +18,13 @@
 
 ## 使用
 
-最新 `RPX_VERSION` 为 ![Release Version](https://img.shields.io/github/v/release/GitLqr/RePluginX.svg)
+- 开源协议：[![license](http://img.shields.io/badge/license-Apache2.0-brightgreen.svg?style=flat)](https://github.com/Qihoo360/RePlugin/blob/master/LICENSE) 
+- **RPX_VERSION**： ![Release Version](https://img.shields.io/github/v/release/GitLqr/RePluginX.svg)
+
+- **gralde Versions**：![](https://img.shields.io/badge/gradle-4.6-green)
+- **gradle-android-tools Versions**：![](https://img.shields.io/badge/android.tools-2.3.3-green) ![](https://img.shields.io/badge/android.tools-3.2.1-green)
+
+
 
 ### 1、集成  jitpack 仓库
 
@@ -50,7 +56,7 @@ allprojects {
 buildscript {
     ...
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:2.3.3' // AndroidX 工程需升级到 3.2.0 及以上
         classpath "com.github.GitLqr.RePluginX:replugin-host-gradle:${RPX_VERSION}"
     }
 }
@@ -61,7 +67,9 @@ buildscript {
 ```groovy
 dependencies {
     ...
-    compile "com.github.GitLqr.RePluginX:replugin-host-library:${RPX_VERSION}"
+    implementation "com.github.GitLqr.RePluginX:replugin-host-library:${RPX_VERSION}"
+    // 注意：如果是 AndroidX 宿主工程，必须添加如下依赖 ！！
+    // implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
 }
 ```
 
@@ -75,7 +83,7 @@ dependencies {
 buildscript {
     ...
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:2.3.3' // AndroidX 工程需升级到 3.2.0 及以上
         classpath "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${RPX_VERSION}"
     }
 }
@@ -86,7 +94,7 @@ buildscript {
 ```groovy
 dependencies {
     ...
-    compile "com.github.GitLqr.RePluginX:replugin-plugin-library:${RPX_VERSION}"
+    implementation "com.github.GitLqr.RePluginX:replugin-plugin-library:${RPX_VERSION}"
 }
 ```
 
@@ -97,3 +105,4 @@ dependencies {
 
 - （[RePlugin 官方【英文】文档](./README_ORIGINAL.md)）
 - （[RePlugin 官方【中文】文档](./README_CN.md)）
+- [（RePlugin 官方 Wiki）](https://github.com/Qihoo360/RePlugin/wiki)
