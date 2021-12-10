@@ -1,23 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.google.com/' }
-        maven { url 'https://jitpack.io' }
-    }
+    { p, cfg = "rpx-config.gradle" -> if (new File(p, cfg).exists()) apply from: "${p}/${cfg}" else if (p.exists()) call(p.parentFile) }(buildscript.sourceFile.parentFile)
+    repositories repositoriesExt
     dependencies {
-        classpath "com.android.tools.build:gradle:3.2.1"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath classpathExt['androidx-build-tools']
+        classpath classpathExt['android-maven-gradle-plugin']
     }
 }
 
 allprojects {
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.google.com/' }
-        maven { url 'https://jitpack.io' }
-    }
+    repositories repositoriesExt
 }
 
 task clean(type: Delete) {

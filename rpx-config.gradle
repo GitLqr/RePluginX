@@ -1,7 +1,7 @@
 project.ext {
     // 统一版本
     android_build_tools_version = "2.3.3"
-    androidx_build_tools_version = "3.2.0" // AndroidX 至少 3.2.0 起步
+    androidx_build_tools_version = "3.2.1" // AndroidX 至少 3.2.0 起步
     kotlin_version = '1.1.3'
     repluginx_version = 'v0.0.2'
     support_version = '25.3.1'
@@ -22,11 +22,12 @@ project.ext {
     ]
 
     classpathExt = [
-            "android-build-tools"   : "com.android.tools.build:gradle:${android_build_tools_version}",
-            "androidx-build-tools"  : "com.android.tools.build:gradle:${androidx_build_tools_version}",
-            "kotlin-gradle-plugin"  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
-            "replugin-host-gradle"  : "com.github.GitLqr.RePluginX:replugin-host-gradle:${repluginx_version}",
-            "replugin-plugin-gradle": "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${repluginx_version}"
+            "android-build-tools"        : "com.android.tools.build:gradle:${android_build_tools_version}",
+            "androidx-build-tools"       : "com.android.tools.build:gradle:${androidx_build_tools_version}",
+            "kotlin-gradle-plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+            "replugin-host-gradle"       : "com.github.GitLqr.RePluginX:replugin-host-gradle:${repluginx_version}",
+            "replugin-plugin-gradle"     : "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${repluginx_version}",
+            "android-maven-gradle-plugin": "com.github.dcendents:android-maven-gradle-plugin:2.1"
     ]
 
     dependenciesExt = [
