@@ -44,10 +44,10 @@ repluginHostConfig {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile dependenciesExt['appcompat-androidx']
-    compile dependenciesExt['localbroadcastmanager-androidx']
-    compile dependenciesExt['replugin-host-library']
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation dependenciesExt['appcompat-androidx']
+    implementation dependenciesExt['localbroadcastmanager-androidx']
+    implementation dependenciesExt['replugin-host-library']
 }
 
 

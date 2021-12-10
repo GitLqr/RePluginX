@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 task makeJar(type: Jar, dependsOn: ['build']) {

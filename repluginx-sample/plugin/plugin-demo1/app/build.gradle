@@ -66,13 +66,31 @@ repluginPluginConfig {
 }
 
 dependencies {
-    compile dependenciesExt['replugin-plugin-library']
-    // provided files('libs/fragment.jar')//这个jar就是从Support-fragment中提取出来的并非特制包目的是为了骗过编译期
-    // provided dependenciesExt['appcompat-androidx']
-    compile dependenciesExt['appcompat-androidx']
-    provided files('libs/common-utils-lib-1.0.0.jar')//这个jar就是从Host的utils中编译生成的，其目的是为了骗过编译期
-    // compile(name: 'plugin-library', ext: 'aar')//sample:compile aar
-    compile project(":library")
+    implementation dependenciesExt['replugin-plugin-library']
+
+    // 错误导入，会报错：
+    // Android dependency 'androidx.fragment:fragment:1.0.0' is set to compileOnly/provided which is not supported
+    // 报错本质：
+    // compileOnly/provided 只能用于依赖 jar，不能用于 aar 。
+    // 而 compileOnly 'androidx.appcompat:appcompat:1.0.0' 会同时依赖n个其他androidx库（包括fragment、lifecycle...），这些会被认定为是 compileOnly aar
+    // 解决方案参考：
+    // https://github.com/Qihoo360/RePlugin/issues/557
+    // https://github.com/luohaoxuan320/RePluginDemo/wiki/%E6%8F%92%E4%BB%B6-AppCompatActivity-%E4%B8%8E-v4.Fragment%E5%85%B1%E5%AD%98
+    // compileOnly dependenciesExt['appcompat-androidx']
+
+    // 这个jar就是从Androidx-fragment中提取出来的并非特制包目的是为了骗过编译期
+    compileOnly files('libs/androidx-fragment.jar')
+    // androidx-fragment 需要依赖的其他jar包 begin ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    compileOnly files('libs/androidx-lifecycle-common-2.4.0.jar')
+    compileOnly files('libs/androidx-lifecycle-viewmodel.jar')
+    compileOnly files('libs/androidx-activity.jar')
+    compileOnly files('libs/androidx-savedstate.jar')
+    // androidx-fragment 需要依赖的其他jar包 end ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    compileOnly files('libs/common-utils-lib-1.0.0.jar') //这 个jar就是从Host的utils中编译生成的，其目的是为了骗过编译期
+
+    implementation(name: 'plugin-library', ext: 'aar') // sample:compile aar
+    // implementation project(":library")
 }
 
 if (android.defaultConfig.multiDexEnabled) {
