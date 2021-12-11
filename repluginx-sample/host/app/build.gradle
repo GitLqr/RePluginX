@@ -37,6 +37,7 @@ android {
 
 apply plugin: 'replugin-host-gradle'
 repluginHostConfig {
+    // screenOrientation = 'landscape' // 坑位 Activity 方向（portrait / landscape）
     useAppCompat = true
 
     // 可以在这里自定义常驻进程的名字
