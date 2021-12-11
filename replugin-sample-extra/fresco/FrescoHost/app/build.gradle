@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         applicationId "com.qihoo360.replugin.fresco.host"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -52,7 +52,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile dependenciesExt['appcompat-v7']
     testCompile 'junit:junit:4.12'
 
     // fresco依赖bolts-android

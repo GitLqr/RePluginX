@@ -14,4 +14,5 @@
  * the License.
  */
 
+rootProject.name = 'repluginx-sample.host'
 include ':app', ':utils'

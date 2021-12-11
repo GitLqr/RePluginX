@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion androidExt['compileSdkVersion']
+    buildToolsVersion androidExt['buildToolsVersion']
 
     defaultConfig {
         applicationId "com.qihoo360.replugin.fresco.plugin"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion androidExt['minSdkVersion']
+        targetSdkVersion androidExt['targetSdkVersion']
         versionCode 1
         versionName "1.0"
     }
@@ -30,8 +30,7 @@ apply plugin: 'replugin-plugin-gradle'
 
 dependencies {
     compile dependenciesExt['replugin-plugin-library']
-
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile dependenciesExt['appcompat-v7']
 
     /** provided or compile */
     if (rootProject.ext.isPlugin) {
