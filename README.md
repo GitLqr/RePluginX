@@ -16,8 +16,8 @@
 
 ## 特性
 
-- 同时支持 AnroidSupport、AndroidX 
-- 支持配置 Activity 屏幕方向（待完成）
+- ✅ 同时支持 AnroidSupport、AndroidX
+- ✅ 支持配置坑位 Activity 的屏幕方向
 - ...
 
 
@@ -75,7 +75,18 @@ dependencies {
     // 注意：如果是 AndroidX 宿主工程，必须添加如下依赖 ！！
     // implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
 }
+
+apply plugin: 'replugin-host-gradle'
+repluginHostConfig {
+    screenOrientation = 'landscape' // 坑位 Activity 方向（portrait / landscape）
+    useAppCompat = true
+
+    // 可以在这里自定义常驻进程的名字
+    // persistentName = ":XXXXService"
+}
 ```
+
+> 注意：`screenOrientation` 是坑位 Activity 的屏幕方向配置，默认不配置即为竖屏 `portrait`，如需横屏可配置为 `landscape`。
 
 
 
