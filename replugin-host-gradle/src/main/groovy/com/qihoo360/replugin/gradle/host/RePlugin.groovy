@@ -236,6 +236,12 @@ public class Replugin implements Plugin<Project> {
 
 class RepluginConfig {
 
+    /**
+     * 屏幕方向
+     * 注意：默认是坚屏坑位：portrait，可配置为横屏坑位：landscape。
+     */
+    def screenOrientation = "portrait"
+
     /** 自定义进程的数量(除 UI 和 Persistent 进程) */
     def countProcess = 3
 

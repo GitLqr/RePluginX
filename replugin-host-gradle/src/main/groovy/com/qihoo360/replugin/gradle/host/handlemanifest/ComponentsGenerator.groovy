@@ -39,7 +39,7 @@ class ComponentsGenerator {
     def static final expV = 'false'
 
     def static final ori = 'android:screenOrientation'
-    def static final oriV = 'portrait'
+    def static oriV = 'portrait'
 
     def static final theme = 'android:theme'
     def static final themeTS = '@android:style/Theme.Translucent.NoTitleBar'
@@ -56,6 +56,8 @@ class ComponentsGenerator {
      * @return String       插件化框架中需要的组件
      */
     def static generateComponent(def applicationID, def config) {
+        updateConfig(applicationID, config)
+
         // 是否使用 AppCompat 库（涉及到默认主题）
         if (config.useAppCompat) {
             themeNTS = THEME_NTS_USE_APP_COMPAT
@@ -247,6 +249,8 @@ class ComponentsGenerator {
      * 生成多进程坑位配置
      */
     def static generateMultiProcessComponent(def applicationID, def config) {
+        updateConfig(applicationID, config)
+
         if (config.countProcess == 0) {
             return ''
         }
@@ -429,5 +433,12 @@ class ComponentsGenerator {
 
         // 删除 application 标签
         return writer.toString().replace("<application>", "").replace("</application>", "")
+    }
+
+    /**
+     * 更新配置
+     */
+    def static updateConfig(def applicationID, def config){
+        oriV = config.screenOrientation
     }
 }
