@@ -18,26 +18,19 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 //apply plugin: 'maven'
 //apply plugin: 'maven-publish'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.GitLqr'
-
-repositories {
-    jcenter()
-    mavenCentral()
-    maven() { url 'https://maven.google.com' }
-}
+apply from: '../rpx-maven-repository.gradle'
 
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+    { p, cfg = "rpx-config.gradle" -> if (new File(p, cfg).exists()) apply from: "${p}/${cfg}" else if (p.exists()) call(p.parentFile) }(buildscript.sourceFile.parentFile)
+    repositories repositoriesExt
 
     dependencies {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
         classpath 'com.github.dcendents:android-maven-plugin:1.2'
     }
 }
+
+repositories repositoriesExt
 
 dependencies {
     compile 'com.android.tools.build:gradle:2.1.3' // >= 2.14.1

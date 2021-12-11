@@ -1,9 +1,19 @@
 project.ext {
+    // 库group（多lib时，jitpack插件会自动将其变成 group.repoName，即com.github.GitLqr.RePluginX）
+    JITPACK_PLUGIN_GROUP = "com.github.GitLqr"
+
+    TEST_MAVEN_DIR = 'D:\\maven_repository' // maven 测试仓库的位置
+    TEST_PLUGIN_GROUP = "${JITPACK_PLUGIN_GROUP}.RePluginX" // 测试插件的 group
+    TEST_PLUGIN_VERSION = "test" // 测试插件的 version
+
+    TEST_MAVEN_ENABLE = false // 是否开启 maven 测试仓库（注意：开启后 jitpack 插件失效，只在本地测试时才开启）
+    TEST_PLUGIN_ENABLE = false // 是否开启 测试插件（控制是否使用本地测试插件，或是远端正式发布的插件）
+
     // 统一版本
     android_build_tools_version = "2.3.3"
     androidx_build_tools_version = "3.2.1" // AndroidX 至少 3.2.0 起步
     kotlin_version = '1.1.3'
-    repluginx_version = 'v0.0.2'
+    repluginx_version = 'v0.0.4'
     support_version = '25.3.1'
     androidx_version = '1.2.0'
 
@@ -23,8 +33,8 @@ project.ext {
             "android-build-tools"        : "com.android.tools.build:gradle:${android_build_tools_version}",
             "androidx-build-tools"       : "com.android.tools.build:gradle:${androidx_build_tools_version}",
             "kotlin-gradle-plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
-            "replugin-host-gradle"       : "com.github.GitLqr.RePluginX:replugin-host-gradle:${repluginx_version}",
-            "replugin-plugin-gradle"     : "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${repluginx_version}",
+            "replugin-host-gradle"       : "com.github.GitLqr.RePluginX:replugin-host-gradle:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}",
+            "replugin-plugin-gradle"     : "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}",
             "android-maven-gradle-plugin": "com.github.dcendents:android-maven-gradle-plugin:2.1"
     ]
 
@@ -34,19 +44,23 @@ project.ext {
             "appcompat-androidx"            : "androidx.appcompat:appcompat:${androidx_version}",
             "localbroadcastmanager-androidx": "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0",
             "kotlin-stdlib-jre7"            : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
-            "replugin-host-library"         : "com.github.GitLqr.RePluginX:replugin-host-library:${repluginx_version}",
-            "replugin-plugin-library"       : "com.github.GitLqr.RePluginX:replugin-plugin-library:${repluginx_version}"
+            "replugin-host-library"         : "com.github.GitLqr.RePluginX:replugin-host-library:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}",
+            "replugin-plugin-library"       : "com.github.GitLqr.RePluginX:replugin-plugin-library:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}"
     ]
 
 
     // 统一仓库
+
     repositoriesExt = {
-        mavenLocal()
+        // mavenLocal()
         // MavenCentral 远程仓库：https://mvnrepository.com
         mavenCentral()
         // 阿里云云效仓库：https://maven.aliyun.com/mvn/guide
         maven { url 'https://maven.aliyun.com/repository/public/' }
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
+        maven { url uri(TEST_MAVEN_DIR) }
     }
+
+
 }

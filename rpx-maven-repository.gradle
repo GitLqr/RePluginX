@@ -1,0 +1,18 @@
+if (TEST_MAVEN_ENABLE) {
+    // 本地测试配置
+    apply plugin: 'maven-publish'
+    apply plugin: 'maven'
+    group = TEST_PLUGIN_GROUP
+    version = TEST_PLUGIN_VERSION
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: uri(TEST_MAVEN_DIR))
+            }
+        }
+    }
+} else {
+    // 发布到 jitpack.io
+    apply plugin: 'com.github.dcendents.android-maven'
+    group = JITPACK_PLUGIN_GROUP
+}

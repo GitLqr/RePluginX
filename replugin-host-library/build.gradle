@@ -18,8 +18,7 @@
  * @author RePlugin Team
  */
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.GitLqr'
+apply from: '../rpx-maven-repository.gradle'
 
 android {
     compileSdkVersion androidExt['compileSdkVersion']
