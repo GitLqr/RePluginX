@@ -1,5 +1,4 @@
-
-## RePluginX 
+## RePluginX
 
 <p align="center">
   <a href="https://github.com/Qihoo360/RePlugin/wiki">
@@ -13,7 +12,6 @@
   </a>
 </p>
 
-
 ## 特性
 
 - ✅ 支持 AnroidSupport、AndroidX 工程
@@ -21,17 +19,13 @@
 - ✅ 支持 坑位 Activity 的屏幕方向 配置 (`screenOrientation`)
 - ...
 
-
-
 ## 使用
 
 - **RPX_VERSION**： ![Release Version](https://img.shields.io/github/v/release/GitLqr/RePluginX.svg)
 - **gralde Versions**：![](https://img.shields.io/badge/gradle-4.6-green)
 - **gradle-android-tools Versions**：![](https://img.shields.io/badge/android.tools-2.3.3-green) ![](https://img.shields.io/badge/android.tools-3.2.1-green)
 
-
-
-### 1、集成  jitpack 仓库
+### 1、集成 jitpack 仓库
 
 宿主/插件 项目根目录 build.gradle 中加入：
 
@@ -51,8 +45,6 @@ allprojects {
 }
 ```
 
-
-
 ### 2、配置 宿主(host) 工程
 
 在宿主工程根目录下 build.gradle 中加入：
@@ -67,7 +59,7 @@ buildscript {
 }
 ```
 
-在宿主 主Module(app) 目录下 build.gradle 中加入：
+在宿主 主 Module(app) 目录下 build.gradle 中加入：
 
 ```groovy
 dependencies {
@@ -85,10 +77,8 @@ repluginHostConfig {
 }
 ```
 
-- `enable`：是否启用插件功能，默认为true，宿主工程一般不会用到！
+- `enable`：是否启用插件功能，默认为 true，宿主工程一般不会用到！
 - `screenOrientation` ：坑位 Activity 的屏幕方向配置，默认不配置即为竖屏 `portrait`，如需横屏可配置为 `landscape`。
-
-
 
 ### 3、配置 插件(plugin) 工程
 
@@ -104,7 +94,7 @@ buildscript {
 }
 ```
 
-在插件 主Module(app) 目录下 build.gradle 中加入：
+在插件 主 Module(app) 目录下 build.gradle 中加入：
 
 ```groovy
 dependencies {
@@ -120,10 +110,11 @@ repluginPluginConfig {
 }
 ```
 
-- `enable`：是否启用插件功能，默认为true。配置为 false 时，插件工程将失去 RePlugin Transform 功能（Transform 很耗时），这意味着工程打包出来的就只是普通的apk，但同时也恢复了原有的编译速度，一般只在快速开发工程时配置为 false。记得在正式出包前配置为 true 或将其注释掉。
+- `enable`：是否启用插件功能，默认为 true。配置为 false 时，插件工程将失去 RePlugin Transform 功能（Transform 很耗时），这意味着工程打包出来的就只是普通的 apk，但同时也恢复了原有的编译速度，一般只在快速开发工程时配置为 false。记得在正式出包前配置为 true 或将其注释掉。
 
+## 技术要点
 
-
+- [《RePluginX - 兼容 AndroidX 并加入新特性开发纪要》](https://juejin.cn/post/7040733114506674183)
 
 ## 官方原文档
 
