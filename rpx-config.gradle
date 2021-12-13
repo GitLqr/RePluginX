@@ -1,8 +1,15 @@
+static def isWindows() {
+    return org.gradle.internal.os.OperatingSystem.current().isWindows()
+    // return System.properties['os.name'].contains('windows');
+}
+
 project.ext {
     // 库group（多lib时，jitpack插件会自动将其变成 group.repoName，即com.github.GitLqr.RePluginX）
     JITPACK_PLUGIN_GROUP = "com.github.GitLqr"
 
-    TEST_MAVEN_DIR = 'D:\\maven_repository' // maven 测试仓库的位置
+    // maven 测试仓库的位置
+    TEST_MAVEN_DIR = isWindows() ? 'D:\\maven_repository' : '~/maven_repository'
+
     TEST_PLUGIN_GROUP = "${JITPACK_PLUGIN_GROUP}.RePluginX" // 测试插件的 group
     TEST_PLUGIN_VERSION = "test" // 测试插件的 version
 
