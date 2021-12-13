@@ -63,11 +63,12 @@ public class ReClassTransform extends Transform {
                    TransformOutputProvider outputProvider,
                    boolean isIncremental) throws IOException, TransformException, InterruptedException {
 
-        welcome()
-
         /* 读取用户配置 */
         def config = project.extensions.getByName('repluginPluginConfig')
 
+        if(!config.enable) return
+
+        welcome()
 
         File rootLocation = null
         try {

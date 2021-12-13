@@ -38,7 +38,6 @@ public class Replugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        println "${TAG} Welcome to replugin world ! "
 
         this.project = project
 
@@ -48,59 +47,71 @@ public class Replugin implements Plugin<Project> {
         if (project.plugins.hasPlugin(AppPlugin)) {
 
             def android = project.extensions.getByType(AppExtension)
-            android.applicationVariants.all { variant ->
 
-                addShowPluginTask(variant)
-
+            project.afterEvaluate {
                 if (config == null) {
                     config = project.extensions.getByName(AppConstant.USER_CONFIG)
-                    checkUserConfig(config)
+                    if (config.enable) checkUserConfig(config)
                 }
 
-                def generateBuildConfigTask = VariantCompat.getGenerateBuildConfigTask(variant)
-                def appID = generateBuildConfigTask.appPackageName
-                def newManifest = ComponentsGenerator.generateComponent(appID, config)
-                println "${TAG} countTask=${config.countTask}"
+                if (config.enable) {
+                    println "${TAG} Welcome to replugin world ! "
 
-                def variantData = variant.variantData
-                def scope = variantData.scope
+                    android.applicationVariants.all { variant ->
 
-                //host generate task
-                def generateHostConfigTaskName = scope.getTaskName(AppConstant.TASK_GENERATE, "HostConfig")
-                def generateHostConfigTask = project.task(generateHostConfigTaskName)
+                        addShowPluginTask(variant)
 
-                generateHostConfigTask.doLast {
-                    FileCreators.createHostConfig(project, variant, config)
-                }
-                generateHostConfigTask.group = AppConstant.TASKS_GROUP
+                        // if (config == null) {
+                        //     config = project.extensions.getByName(AppConstant.USER_CONFIG)
+                        //     checkUserConfig(config)
+                        // }
 
-                //depends on build config task
-                if (generateBuildConfigTask) {
-                    generateHostConfigTask.dependsOn generateBuildConfigTask
-                    generateBuildConfigTask.finalizedBy generateHostConfigTask
-                }
+                        def generateBuildConfigTask = VariantCompat.getGenerateBuildConfigTask(variant)
+                        def appID = generateBuildConfigTask.appPackageName
+                        def newManifest = ComponentsGenerator.generateComponent(appID, config)
+                        println "${TAG} countTask=${config.countTask}"
 
-                //json generate task
-                def generateBuiltinJsonTaskName = scope.getTaskName(AppConstant.TASK_GENERATE, "BuiltinJson")
-                def generateBuiltinJsonTask = project.task(generateBuiltinJsonTaskName)
+                        def variantData = variant.variantData
+                        def scope = variantData.scope
 
-                generateBuiltinJsonTask.doLast {
-                    FileCreators.createBuiltinJson(project, variant, config)
-                }
-                generateBuiltinJsonTask.group = AppConstant.TASKS_GROUP
+                        //host generate task
+                        def generateHostConfigTaskName = scope.getTaskName(AppConstant.TASK_GENERATE, "HostConfig")
+                        def generateHostConfigTask = project.task(generateHostConfigTaskName)
 
-                //depends on mergeAssets Task
-                def mergeAssetsTask = VariantCompat.getMergeAssetsTask(variant)
-                if (mergeAssetsTask) {
-                    generateBuiltinJsonTask.dependsOn mergeAssetsTask
-                    mergeAssetsTask.finalizedBy generateBuiltinJsonTask
-                }
+                        generateHostConfigTask.doLast {
+                            FileCreators.createHostConfig(project, variant, config)
+                        }
+                        generateHostConfigTask.group = AppConstant.TASKS_GROUP
 
-                variant.outputs.each { output ->
-                    VariantCompat.getProcessManifestTask(output).doLast {
-                        println "${AppConstant.TAG} processManifest: ${it.outputs.files}"
-                        it.outputs.files.each { File file ->
-                            updateManifest(file, newManifest)
+                        //depends on build config task
+                        if (generateBuildConfigTask) {
+                            generateHostConfigTask.dependsOn generateBuildConfigTask
+                            generateBuildConfigTask.finalizedBy generateHostConfigTask
+                        }
+
+                        //json generate task
+                        def generateBuiltinJsonTaskName = scope.getTaskName(AppConstant.TASK_GENERATE, "BuiltinJson")
+                        def generateBuiltinJsonTask = project.task(generateBuiltinJsonTaskName)
+
+                        generateBuiltinJsonTask.doLast {
+                            FileCreators.createBuiltinJson(project, variant, config)
+                        }
+                        generateBuiltinJsonTask.group = AppConstant.TASKS_GROUP
+
+                        //depends on mergeAssets Task
+                        def mergeAssetsTask = VariantCompat.getMergeAssetsTask(variant)
+                        if (mergeAssetsTask) {
+                            generateBuiltinJsonTask.dependsOn mergeAssetsTask
+                            mergeAssetsTask.finalizedBy generateBuiltinJsonTask
+                        }
+
+                        variant.outputs.each { output ->
+                            VariantCompat.getProcessManifestTask(output).doLast {
+                                println "${AppConstant.TAG} processManifest: ${it.outputs.files}"
+                                it.outputs.files.each { File file ->
+                                    updateManifest(file, newManifest)
+                                }
+                            }
                         }
                     }
                 }
@@ -235,6 +246,9 @@ public class Replugin implements Plugin<Project> {
 }
 
 class RepluginConfig {
+
+    /** 是否启用 */
+    def enable = true
 
     /**
      * 屏幕方向

@@ -34,8 +34,6 @@ public class ReClassPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
 
-        println "${AppConstant.TAG} Welcome to replugin world ! "
-
         /* Extensions */
         project.extensions.create(AppConstant.USER_CONFIG, ReClassConfig)
 
@@ -50,90 +48,98 @@ public class ReClassPlugin implements Plugin<Project> {
             def startHostAppTask = null
             def restartHostAppTask = null
 
-            android.applicationVariants.all { variant ->
-                PluginDebugger pluginDebugger = new PluginDebugger(project, config, variant)
+            // 创建 replugin-plugin task
+            project.afterEvaluate {
+                if(config.enable){
+                    println "${AppConstant.TAG} Welcome to replugin world ! "
 
-                def variantData = variant.variantData
-                def scope = variantData.scope
+                    android.applicationVariants.all { variant ->
+                        PluginDebugger pluginDebugger = new PluginDebugger(project, config, variant)
 
-                def assembleTask = VariantCompat.getAssembleTask(variant)
+                        def variantData = variant.variantData
+                        def scope = variantData.scope
 
-                def installPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_PLUGIN, "")
-                def installPluginTask = project.task(installPluginTaskName)
+                        def assembleTask = VariantCompat.getAssembleTask(variant)
 
-                installPluginTask.doLast {
-                    pluginDebugger.startHostApp()
-                    pluginDebugger.uninstall()
-                    pluginDebugger.forceStopHostApp()
-                    pluginDebugger.startHostApp()
-                    pluginDebugger.install()
-                }
-                installPluginTask.group = AppConstant.TASKS_GROUP
+                        def installPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_PLUGIN, "")
+                        def installPluginTask = project.task(installPluginTaskName)
 
-
-                def uninstallPluginTaskName = scope.getTaskName(AppConstant.TASK_UNINSTALL_PLUGIN, "")
-                def uninstallPluginTask = project.task(uninstallPluginTaskName)
-
-                uninstallPluginTask.doLast {
-                    //generate json
-                    pluginDebugger.uninstall()
-                }
-                uninstallPluginTask.group = AppConstant.TASKS_GROUP
+                        installPluginTask.doLast {
+                            pluginDebugger.startHostApp()
+                            pluginDebugger.uninstall()
+                            pluginDebugger.forceStopHostApp()
+                            pluginDebugger.startHostApp()
+                            pluginDebugger.install()
+                        }
+                        installPluginTask.group = AppConstant.TASKS_GROUP
 
 
-                if (null == forceStopHostAppTask) {
-                    forceStopHostAppTask = project.task(AppConstant.TASK_FORCE_STOP_HOST_APP)
-                    forceStopHostAppTask.doLast {
-                        //generate json
-                        pluginDebugger.forceStopHostApp()
+                        def uninstallPluginTaskName = scope.getTaskName(AppConstant.TASK_UNINSTALL_PLUGIN, "")
+                        def uninstallPluginTask = project.task(uninstallPluginTaskName)
+
+                        uninstallPluginTask.doLast {
+                            //generate json
+                            pluginDebugger.uninstall()
+                        }
+                        uninstallPluginTask.group = AppConstant.TASKS_GROUP
+
+
+                        if (null == forceStopHostAppTask) {
+                            forceStopHostAppTask = project.task(AppConstant.TASK_FORCE_STOP_HOST_APP)
+                            forceStopHostAppTask.doLast {
+                                //generate json
+                                pluginDebugger.forceStopHostApp()
+                            }
+                            forceStopHostAppTask.group = AppConstant.TASKS_GROUP
+                        }
+
+                        if (null == startHostAppTask) {
+                            startHostAppTask = project.task(AppConstant.TASK_START_HOST_APP)
+                            startHostAppTask.doLast {
+                                //generate json
+                                pluginDebugger.startHostApp()
+                            }
+                            startHostAppTask.group = AppConstant.TASKS_GROUP
+                        }
+
+                        if (null == restartHostAppTask) {
+                            restartHostAppTask = project.task(AppConstant.TASK_RESTART_HOST_APP)
+                            restartHostAppTask.doLast {
+                                //generate json
+                                pluginDebugger.startHostApp()
+                            }
+                            restartHostAppTask.group = AppConstant.TASKS_GROUP
+                            restartHostAppTask.dependsOn(forceStopHostAppTask)
+                        }
+
+
+                        if (assembleTask) {
+                            installPluginTask.dependsOn assembleTask
+                        }
+
+                        def runPluginTaskName = scope.getTaskName(AppConstant.TASK_RUN_PLUGIN, "")
+                        def runPluginTask = project.task(runPluginTaskName)
+                        runPluginTask.doLast {
+                            pluginDebugger.run()
+                        }
+                        runPluginTask.group = AppConstant.TASKS_GROUP
+
+                        def installAndRunPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_AND_RUN_PLUGIN, "")
+                        def installAndRunPluginTask = project.task(installAndRunPluginTaskName)
+                        installAndRunPluginTask.doLast {
+                            pluginDebugger.run()
+                        }
+                        installAndRunPluginTask.group = AppConstant.TASKS_GROUP
+                        installAndRunPluginTask.dependsOn installPluginTask
                     }
-                    forceStopHostAppTask.group = AppConstant.TASKS_GROUP
-                }
 
-                if (null == startHostAppTask) {
-                    startHostAppTask = project.task(AppConstant.TASK_START_HOST_APP)
-                    startHostAppTask.doLast {
-                        //generate json
-                        pluginDebugger.startHostApp()
-                    }
-                    startHostAppTask.group = AppConstant.TASKS_GROUP
-                }
+                    CommonData.appPackage = android.defaultConfig.applicationId
 
-                if (null == restartHostAppTask) {
-                    restartHostAppTask = project.task(AppConstant.TASK_RESTART_HOST_APP)
-                    restartHostAppTask.doLast {
-                        //generate json
-                        pluginDebugger.startHostApp()
-                    }
-                    restartHostAppTask.group = AppConstant.TASKS_GROUP
-                    restartHostAppTask.dependsOn(forceStopHostAppTask)
+                    println ">>> APP_PACKAGE " + CommonData.appPackage
                 }
-
-
-                if (assembleTask) {
-                    installPluginTask.dependsOn assembleTask
-                }
-
-                def runPluginTaskName = scope.getTaskName(AppConstant.TASK_RUN_PLUGIN, "")
-                def runPluginTask = project.task(runPluginTaskName)
-                runPluginTask.doLast {
-                    pluginDebugger.run()
-                }
-                runPluginTask.group = AppConstant.TASKS_GROUP
-
-                def installAndRunPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_AND_RUN_PLUGIN, "")
-                def installAndRunPluginTask = project.task(installAndRunPluginTaskName)
-                installAndRunPluginTask.doLast {
-                    pluginDebugger.run()
-                }
-                installAndRunPluginTask.group = AppConstant.TASKS_GROUP
-                installAndRunPluginTask.dependsOn installPluginTask
             }
 
-            CommonData.appPackage = android.defaultConfig.applicationId
-
-            println ">>> APP_PACKAGE " + CommonData.appPackage
-
+            // 创建 Transform
             def transform = new ReClassTransform(project)
             // 将 transform 注册到 android
             android.registerTransform(transform)
@@ -142,6 +148,9 @@ public class ReClassPlugin implements Plugin<Project> {
 }
 
 class ReClassConfig {
+
+    /** 是否启用 */
+    def enable = true
 
     /** 编译的 App Module 的名称 */
     def appModule = ':app'
