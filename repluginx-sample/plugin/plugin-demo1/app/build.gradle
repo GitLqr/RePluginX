@@ -60,6 +60,7 @@ repositories {
 // 这个plugin需要放在android配置之后，因为需要读取android中的配置项
 apply plugin: 'replugin-plugin-gradle'
 repluginPluginConfig {
+    // enable = true // 是否启用插件功能，默认为true
     pluginName = "demo1"
     hostApplicationId = "com.qihoo360.replugin.sample.host"
     hostAppLauncherActivity = "com.qihoo360.replugin.sample.host.MainActivity"

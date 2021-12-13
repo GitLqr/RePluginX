@@ -37,6 +37,7 @@ android {
 
 apply plugin: 'replugin-host-gradle'
 repluginHostConfig {
+    // enable = true // 是否启用插件功能，默认为true
     // screenOrientation = 'landscape' // 坑位 Activity 方向（portrait / landscape）
     useAppCompat = true
 
