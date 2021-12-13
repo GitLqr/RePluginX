@@ -16,8 +16,9 @@
 
 ## 特性
 
-- ✅ 同时支持 AnroidSupport、AndroidX
-- ✅ 支持配置坑位 Activity 的屏幕方向
+- ✅ 支持 AnroidSupport、AndroidX 工程
+- ✅ 支持 RePlugin Transform 开关 配置 (`enable`)
+- ✅ 支持 坑位 Activity 的屏幕方向 配置 (`screenOrientation`)
 - ...
 
 
