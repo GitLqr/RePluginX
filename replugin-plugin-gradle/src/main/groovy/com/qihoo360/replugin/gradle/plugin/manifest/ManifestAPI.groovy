@@ -72,7 +72,13 @@ public class ManifestAPI {
                 } else {
                     manifestOutputFile = new File(dir.getAsFile().get(), "AndroidManifest.xml")
                 }
-                dir = processManifestTask.getInstantRunManifestOutputDirectory()
+
+                // 适配高版本 android build gradle 插件
+                if (processManifestTask.metaClass.respondsTo(processManifestTask, "getInstantAppManifestOutputDirectory")) {
+                    dir = processManifestTask.getInstantAppManifestOutputDirectory()
+                } else {
+                    dir = processManifestTask.getInstantRunManifestOutputDirectory()
+                }
                 if (dir instanceof File || dir instanceof String) {
                     instantRunManifestOutputFile = new File(dir, "AndroidManifest.xml")
                 } else {
