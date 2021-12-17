@@ -17,7 +17,7 @@ buildscript {
     { p, cfg = "rpx-config.gradle" -> if (new File(p, cfg).exists()) apply from: "${p}/${cfg}" else if (p.exists()) call(p.parentFile) }(buildscript.sourceFile.parentFile)
     repositories repositoriesExt
     dependencies {
-        classpath classpathExt['androidx-build-tools']
+        classpath classpathExt['android-build-tools']
         classpath classpathExt['replugin-host-gradle']
     }
 }

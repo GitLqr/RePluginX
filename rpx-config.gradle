@@ -17,8 +17,7 @@ project.ext {
     TEST_PLUGIN_ENABLE = false // 是否开启 测试插件（控制是否使用本地测试插件，或是远端正式发布的插件）
 
     // 统一版本
-    android_build_tools_version = "2.3.3"
-    androidx_build_tools_version = "3.2.1" // AndroidX 至少 3.2.0 起步
+    android_build_tools_version = "3.2.1" // 3.5.3，3.2.1，2.3.3，AndroidX 至少 3.2.0 起步
     kotlin_version = '1.1.3'
     repluginx_version = 'v0.0.4'
     support_version = '25.3.1'
@@ -38,7 +37,6 @@ project.ext {
 
     classpathExt = [
             "android-build-tools"        : "com.android.tools.build:gradle:${android_build_tools_version}",
-            "androidx-build-tools"       : "com.android.tools.build:gradle:${androidx_build_tools_version}",
             "kotlin-gradle-plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
             "replugin-host-gradle"       : "com.github.GitLqr.RePluginX:replugin-host-gradle:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}",
             "replugin-plugin-gradle"     : "com.github.GitLqr.RePluginX:replugin-plugin-gradle:${TEST_PLUGIN_ENABLE ? TEST_PLUGIN_VERSION : repluginx_version}",
