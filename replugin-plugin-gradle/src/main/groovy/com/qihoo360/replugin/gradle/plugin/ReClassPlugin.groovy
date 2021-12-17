@@ -23,6 +23,7 @@ import com.qihoo360.replugin.gradle.compat.VariantCompat
 import com.qihoo360.replugin.gradle.plugin.debugger.PluginDebugger
 import com.qihoo360.replugin.gradle.plugin.inner.CommonData
 import com.qihoo360.replugin.gradle.plugin.inner.ReClassTransform
+import com.qihoo360.replugin.gradle.compat.GradleCompat
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -50,18 +51,15 @@ public class ReClassPlugin implements Plugin<Project> {
 
             // 创建 replugin-plugin task
             project.afterEvaluate {
-                if(config.enable){
+                if (config.enable) {
                     println "${AppConstant.TAG} Welcome to replugin world ! "
 
                     android.applicationVariants.all { variant ->
                         PluginDebugger pluginDebugger = new PluginDebugger(project, config, variant)
 
-                        def variantData = variant.variantData
-                        def scope = variantData.scope
-
                         def assembleTask = VariantCompat.getAssembleTask(variant)
 
-                        def installPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_PLUGIN, "")
+                        def installPluginTaskName = GradleCompat.getTaskNameFromVariantScope(variant, AppConstant.TASK_INSTALL_PLUGIN, "")
                         def installPluginTask = project.task(installPluginTaskName)
 
                         installPluginTask.doLast {
@@ -74,7 +72,7 @@ public class ReClassPlugin implements Plugin<Project> {
                         installPluginTask.group = AppConstant.TASKS_GROUP
 
 
-                        def uninstallPluginTaskName = scope.getTaskName(AppConstant.TASK_UNINSTALL_PLUGIN, "")
+                        def uninstallPluginTaskName = GradleCompat.getTaskNameFromVariantScope(variant, AppConstant.TASK_UNINSTALL_PLUGIN, "")
                         def uninstallPluginTask = project.task(uninstallPluginTaskName)
 
                         uninstallPluginTask.doLast {
@@ -117,14 +115,14 @@ public class ReClassPlugin implements Plugin<Project> {
                             installPluginTask.dependsOn assembleTask
                         }
 
-                        def runPluginTaskName = scope.getTaskName(AppConstant.TASK_RUN_PLUGIN, "")
+                        def runPluginTaskName = GradleCompat.getTaskNameFromVariantScope(variant, AppConstant.TASK_RUN_PLUGIN, "")
                         def runPluginTask = project.task(runPluginTaskName)
                         runPluginTask.doLast {
                             pluginDebugger.run()
                         }
                         runPluginTask.group = AppConstant.TASKS_GROUP
 
-                        def installAndRunPluginTaskName = scope.getTaskName(AppConstant.TASK_INSTALL_AND_RUN_PLUGIN, "")
+                        def installAndRunPluginTaskName = GradleCompat.getTaskNameFromVariantScope(variant, AppConstant.TASK_INSTALL_AND_RUN_PLUGIN, "")
                         def installAndRunPluginTask = project.task(installAndRunPluginTaskName)
                         installAndRunPluginTask.doLast {
                             pluginDebugger.run()

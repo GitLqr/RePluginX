@@ -17,7 +17,8 @@ project.ext {
     TEST_PLUGIN_ENABLE = false // 是否开启 测试插件（控制是否使用本地测试插件，或是远端正式发布的插件）
 
     // 统一版本
-    android_build_tools_version = "3.2.1" // 3.5.3，3.2.1，2.3.3，AndroidX 至少 3.2.0 起步
+    // AGP版本号，AndroidX 至少 3.2.0 起步；基于3.2.1，为了兼容低版本 AGP
+    android_build_tools_version = "3.2.1" // 4.1.1，3.5.3，3.2.1，2.3.3，
     kotlin_version = '1.1.3'
     repluginx_version = 'v0.0.4'
     support_version = '25.3.1'

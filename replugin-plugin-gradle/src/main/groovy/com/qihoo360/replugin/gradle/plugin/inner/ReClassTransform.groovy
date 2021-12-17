@@ -18,9 +18,8 @@
 package com.qihoo360.replugin.gradle.plugin.inner
 
 import com.android.build.api.transform.*
-import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.qihoo360.replugin.gradle.compat.GradleCompat
 import com.qihoo360.replugin.gradle.plugin.injector.IClassInjector
 import com.qihoo360.replugin.gradle.plugin.injector.Injectors
 import javassist.ClassPool
@@ -28,6 +27,7 @@ import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.GradleException
 import org.gradle.api.Project
+
 import java.util.regex.Pattern
 
 /**
@@ -44,11 +44,7 @@ public class ReClassTransform extends Transform {
 
     public ReClassTransform(Project p) {
         this.project = p
-        def appPlugin = project.plugins.getPlugin(AppPlugin)
-        // taskManager 在 2.1.3 中为 protected 访问类型的，在之后的版本为 private 访问类型的，
-        // 使用反射访问
-        def taskManager = BasePlugin.metaClass.getProperty(appPlugin, "taskManager")
-        this.globalScope = taskManager.globalScope;
+        this.globalScope = GradleCompat.getProjectGlobalScope(project)
     }
 
     @Override
@@ -66,7 +62,7 @@ public class ReClassTransform extends Transform {
         /* 读取用户配置 */
         def config = project.extensions.getByName('repluginPluginConfig')
 
-        if(!config.enable) return
+        if (!config.enable) return
 
         welcome()
 
@@ -178,7 +174,7 @@ public class ReClassTransform extends Transform {
             String JarAfterzip = map.get(jar.getParent() + File.separatorChar + jar.getName())
             String dirAfterUnzip = JarAfterzip.replace('.jar', '')
             // println ">>> 压缩目录 $dirAfterUnzip"
-            
+
             Util.zipDir(dirAfterUnzip, JarAfterzip)
 
             // println ">>> 删除目录 $dirAfterUnzip"
@@ -241,7 +237,7 @@ public class ReClassTransform extends Transform {
             jar = new File(jarPath)
         }
 
-        if(!jar.exists()){
+        if (!jar.exists()) {
             return
         }
 

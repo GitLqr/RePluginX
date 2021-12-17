@@ -18,6 +18,7 @@
 package com.qihoo360.replugin.gradle.plugin.debugger
 
 import com.qihoo360.replugin.gradle.compat.ScopeCompat
+import com.qihoo360.replugin.gradle.compat.GradleCompat
 import com.qihoo360.replugin.gradle.plugin.AppConstant
 import com.qihoo360.replugin.gradle.plugin.util.CmdUtil
 import org.gradle.api.Project
@@ -37,16 +38,14 @@ class PluginDebugger {
         this.project = project
         this.config = config
         this.variant = variant
-        def variantData = this.variant.variantData
-        def scope = variantData.scope
-        def globalScope = scope.globalScope
-        def variantConfiguration = variantData.variantConfiguration
-        String archivesBaseName = globalScope.getArchivesBaseName();
+        def globalScope = GradleCompat.getVariantGlobalScope(this.variant)
+        def variantConfiguration = GradleCompat.getVariantConfiguration(this.variant)
+        String archivesBaseName = GradleCompat.getArchivesBaseName(globalScope)
         String apkBaseName = archivesBaseName + "-" + variantConfiguration.getBaseName()
 
         File apkDir = new File(globalScope.getBuildDir(), "outputs" + File.separator + "apk")
 
-        String unsigned = (variantConfiguration.getSigningConfig() == null
+        String unsigned = (GradleCompat.getSigningConfig(this.variant) == null
                 ? "-unsigned.apk"
                 : ".apk");
         String apkName = apkBaseName + unsigned
