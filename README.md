@@ -17,13 +17,24 @@
 - ✅ 支持 AnroidSupport、AndroidX 工程
 - ✅ 支持 RePlugin Transform 开关 配置 (`enable`)
 - ✅ 支持 坑位 Activity 的屏幕方向 配置 (`screenOrientation`)
+- ✅ 支持 多版本 AGP `2.x` `3.x` `4.x` （7.x 暂未兼容）
 - ...
+
+| AGP   | Gradle Wrapper | Support |
+| ----- | -------------- | ------- |
+| 2.3.3 | 3.3 / 4.6      | ✔️      |
+| 3.2.1 | 4.6            | ✔️      |
+| 3.5.3 | 5.4.1          | ✔️      |
+| 4.1.1 | 6.5            | ✔️      |
+| 7.0.4 | 7.0.2          | ❌      |
+
+> 注：AGP 即 Android Gradle Plugin
 
 ## 使用
 
 - **RPX_VERSION**： ![Release Version](https://img.shields.io/github/v/release/GitLqr/RePluginX.svg)
 - **gralde Versions**：![](https://img.shields.io/badge/gradle-4.6-green)
-- **gradle-android-tools Versions**：![](https://img.shields.io/badge/android.tools-2.3.3-green) ![](https://img.shields.io/badge/android.tools-3.2.1-green)
+- **AGP Versions**：![](https://img.shields.io/badge/android.tools-3.2.1-green)
 
 ### 1、集成 jitpack 仓库
 
