@@ -22,16 +22,10 @@ apply plugin: 'groovy'
 //apply from: 'config.gradle'
 apply from: '../rpx-maven-repository.gradle'
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
+repositories repositoriesExt
 
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+    repositories repositoriesExt
     dependencies {
 //        classpath 'com.android.tools.build:gradle:2.1.0'
         // 将项目发布到JCenter 所需要的jar   添加依赖
@@ -98,7 +92,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
-
 
 
 // add javadoc/source jar tasks as artifacts
