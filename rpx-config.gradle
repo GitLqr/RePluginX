@@ -20,7 +20,7 @@ project.ext {
     // AGP版本号，AndroidX 至少 3.2.0 起步；基于3.2.1，为了兼容低版本 AGP
     android_build_tools_version = "3.2.1" // 4.1.1，3.5.3，3.2.1，2.3.3，
     kotlin_version = '1.2.51' // 1.1.3
-    repluginx_version = 'v0.0.4'
+    repluginx_version = 'v0.0.6'
     support_version = '28.0.0'
     androidx_version = '1.2.0'
 
