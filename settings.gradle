@@ -13,24 +13,41 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import java.nio.file.Files
 
-// 当前工程
+// 当前工程 Module
 include ':replugin-host-gradle'
 include ':replugin-host-library'
 include ':replugin-plugin-gradle'
 include ':replugin-plugin-library'
 
-// 额外工程
-includeBuild('./replugin-sample/host')
-includeBuild('./replugin-sample/plugin/plugin-demo1')
-includeBuild('./replugin-sample/plugin/plugin-demo2')
-includeBuild('./replugin-sample/plugin/plugin-demo3-kotlin')
-includeBuild('./replugin-sample/plugin/plugin-webview')
-includeBuild('./replugin-sample-extra/fresco/FrescoHost')
-includeBuild('./replugin-sample-extra/fresco/FrescoPlugin')
+// 额外子工程
+def includeBuildProjects = [
+        './replugin-sample/host',
+        './replugin-sample/plugin/plugin-demo1',
+        './replugin-sample/plugin/plugin-demo2',
+        './replugin-sample/plugin/plugin-demo3-kotlin',
+        './replugin-sample/plugin/plugin-webview',
+        './replugin-sample-extra/fresco/FrescoHost',
+        './replugin-sample-extra/fresco/FrescoPlugin',
+        './repluginx-sample/host',
+        './repluginx-sample/plugin/plugin-demo1'
+]
 
-includeBuild('./repluginx-sample/host')
-includeBuild('./repluginx-sample/plugin/plugin-demo1')
+// 批量初始化子工程 local.properties
+def rootFile = file('local.properties')
+if (rootFile.exists()) {
+    includeBuildProjects.forEach {
+        def includeBuildFile = file("${it}/local.properties")
+        if (!includeBuildFile.exists()) {
+            Files.copy(rootFile.toPath(), includeBuildFile.toPath())
+        }
+    }
+}
+
+// 批量导入子工程
+includeBuildProjects.forEach { includeBuild(it) }
+
 
 //includeBuild('./repluginx-sample/host') {
 //    dependencySubstitution {
