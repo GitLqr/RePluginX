@@ -132,3 +132,5 @@ repluginPluginConfig {
 - [《RePlugin 官方【英文】文档》](./README_ORIGINAL.md)
 - [《RePlugin 官方【中文】文档》](./README_CN.md)
 - [《RePlugin 官方 Wiki》](https://github.com/Qihoo360/RePlugin/wiki)
+
+![](https://github.com/LinXunFeng/LinXunFeng/raw/master/static/img/FSAQR.png)
