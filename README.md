@@ -17,6 +17,7 @@
 - ✅ 支持 AnroidSupport、AndroidX 工程
 - ✅ 支持 RePlugin Transform 开关 配置 (`enable`)
 - ✅ 支持 坑位 Activity 的屏幕方向 配置 (`screenOrientation`)
+- ✅ 支持 移除 class 文件 配置 (`classExcludes`、`classIncludes`)
 - ✅ 支持 多版本 AGP `2.x` `3.x` `4.x` （7.x 暂未兼容）
 - ...
 
@@ -117,11 +118,15 @@ dependencies {
 apply plugin: 'replugin-plugin-gradle'
 repluginPluginConfig {
     enable = true // 是否启用插件功能，默认为true
+    classExcludes = ["androidx.*"] // 移除class文件配置（正则表达式）
+    classIncludes = ["androidx.fragment.app.FragmentActivity"] // 保留class文件配置（正则表达式）
     ...
 }
 ```
 
 - `enable`：是否启用插件功能，默认为 true。配置为 false 时，插件工程将失去 RePlugin Transform 功能（Transform 很耗时），这意味着工程打包出来的就只是普通的 apk，但同时也恢复了原有的编译速度，一般只在快速开发工程时配置为 false。记得在正式出包前配置为 true 或将其注释掉。
+- `classExcludes`：移除 class 文件配置【正则表达式】，默认为空(不移除任何 class)。配置后，只要 class 文件的全限定名 满足该配置列表中的任意一项正则表达式时，都不会被打包进插件 apk 文件中，从而减少插件 apk 体积。
+- `classIncludes`：保留 class 文件配置【正则表达式】，默认为空。该配置主要是为了与 `classExcludes` 配合使用，当指定包路径下除了个别 class 文件外需要保留，而其余 class 文件需要移除时，可以在该配置列表中指定要保留的 class 文件全限定名。
 
 ## 技术要点
 
