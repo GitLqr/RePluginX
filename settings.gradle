@@ -23,15 +23,15 @@ include ':replugin-plugin-library'
 
 // 额外子工程
 def includeBuildProjects = [
-        './replugin-sample/host',
-        './replugin-sample/plugin/plugin-demo1',
-        './replugin-sample/plugin/plugin-demo2',
-        './replugin-sample/plugin/plugin-demo3-kotlin',
-        './replugin-sample/plugin/plugin-webview',
-        './replugin-sample-extra/fresco/FrescoHost',
-        './replugin-sample-extra/fresco/FrescoPlugin',
-        './repluginx-sample/host',
-        './repluginx-sample/plugin/plugin-demo1'
+//        './replugin-sample/host',
+//        './replugin-sample/plugin/plugin-demo1',
+//        './replugin-sample/plugin/plugin-demo2',
+//        './replugin-sample/plugin/plugin-demo3-kotlin',
+//        './replugin-sample/plugin/plugin-webview',
+//        './replugin-sample-extra/fresco/FrescoHost',
+//        './replugin-sample-extra/fresco/FrescoPlugin',
+//        './repluginx-sample/host',
+//        './repluginx-sample/plugin/plugin-demo1'
 ]
 
 // 批量初始化子工程 local.properties
