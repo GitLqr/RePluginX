@@ -150,6 +150,12 @@ class ReClassConfig {
     /** 是否启用 */
     def enable = true
 
+    /** 要排除的 class */
+    def classExcludes = []
+
+    /** 要被保留的 class */
+    def classIncludes = []
+
     /** 编译的 App Module 的名称 */
     def appModule = ':app'
 
