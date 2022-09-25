@@ -16,6 +16,11 @@
 #   public *;
 #}
 
+-include ../../../../proguard-rules-android.pro
+
+-keepclasseswithmembers class com.qihoo360.replugin.sample.demo1.** {
+}
+
 # ---------------------------------------------
 # **不要改动**
 # 插件框架、崩溃后台等需要

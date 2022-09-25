@@ -35,8 +35,14 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -61,6 +67,9 @@ repositories {
 apply plugin: 'replugin-plugin-gradle'
 repluginPluginConfig {
     // enable = true // 是否启用插件功能，默认为true
+    classExcludes = ["androidx.*"]
+    // classExcludes = ["com.qihoo360.replugin.sample.demo1.*"]
+    // classIncludes = ["com.qihoo360.replugin.sample.demo1.BaseActivity"]
     pluginName = "demo1"
     hostApplicationId = "com.qihoo360.replugin.sample.host"
     hostAppLauncherActivity = "com.qihoo360.replugin.sample.host.MainActivity"
@@ -79,14 +88,16 @@ dependencies {
     // https://github.com/luohaoxuan320/RePluginDemo/wiki/%E6%8F%92%E4%BB%B6-AppCompatActivity-%E4%B8%8E-v4.Fragment%E5%85%B1%E5%AD%98
     // compileOnly dependenciesExt['appcompat-androidx']
 
-    // 这个jar就是从Androidx-fragment中提取出来的并非特制包目的是为了骗过编译期
-    compileOnly files('libs/androidx-fragment.jar')
-    // androidx-fragment 需要依赖的其他jar包 begin ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    compileOnly files('libs/androidx-lifecycle-common-2.4.0.jar')
-    compileOnly files('libs/androidx-lifecycle-viewmodel.jar')
-    compileOnly files('libs/androidx-activity.jar')
-    compileOnly files('libs/androidx-savedstate.jar')
-    // androidx-fragment 需要依赖的其他jar包 end ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // 注：有 classExcludes 之后，不再使用这种方式，直接 implementation 第三方库即可！！
+//    // 这个jar就是从Androidx-fragment中提取出来的并非特制包目的是为了骗过编译期
+//    compileOnly files('libs/androidx-fragment.jar')
+//    // androidx-fragment 需要依赖的其他jar包 begin ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+//    compileOnly files('libs/androidx-lifecycle-common-2.4.0.jar')
+//    compileOnly files('libs/androidx-lifecycle-viewmodel.jar')
+//    compileOnly files('libs/androidx-activity.jar')
+//    compileOnly files('libs/androidx-savedstate.jar')
+//    // androidx-fragment 需要依赖的其他jar包 end ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    implementation dependenciesExt['appcompat-androidx']
 
     compileOnly files('libs/common-utils-lib-1.0.0.jar') //这 个jar就是从Host的utils中编译生成的，其目的是为了骗过编译期
 
