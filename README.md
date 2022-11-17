@@ -118,8 +118,8 @@ dependencies {
 apply plugin: 'replugin-plugin-gradle'
 repluginPluginConfig {
     enable = true // 是否启用插件功能，默认为true
-    classExcludes = ["androidx.*"] // 移除class文件配置（正则表达式）
-    classIncludes = ["androidx.fragment.app.FragmentActivity"] // 保留class文件配置（正则表达式）
+    classExcludes = [] // 移除class文件配置（正则表达式），例如：["androidx.*"]
+    classIncludes = [] // 保留class文件配置（正则表达式），例如：["androidx.fragment.app.FragmentActivity"]
     ...
 }
 ```
